@@ -1,0 +1,650 @@
+##########################################################
+# Rogue Quest macro by CooLow										#
+# Version 1.0 - 2016.00.00								 #
+# Openkore: http://openkore.com/						 #
+# Brazilian Openkore forum: http://openkorebrasil.org/	 #
+#														 #
+# This source code is licensed under the				 #
+# GNU General Public License, Version 3.                 #
+# See http://www.gnu.org/licenses/gpl.html               #
+##########################################################
+
+automacro reload {
+	status Sitting
+	run-once 1
+	exclusive 1
+	timeout 5
+	call {
+		$oldLogQuest = $LogQuest
+		pause 1
+		$LogQuest = @eval($oldLogQuest - 1)
+		pause 1
+		release all
+		do reload macros
+	}
+}
+
+automacro reload2 {
+	console /Desconectado do Servidor de Mapas/i
+	exclusive 1
+	timeout 5
+	run-once 1
+	call {
+		$oldLogQuest = $LogQuest
+		pause 1
+		$LogQuest = @eval($oldLogQuest - 1)
+		pause 1
+		release all
+		do reload macros
+	}
+}
+
+automacro morreu {
+	console /Você morreu./i
+	call {
+	release all
+	if ($Lab = 1) call console1
+	if ($Lab = 2) call console2
+	if ($Lab = 3) call console3
+	if ($Lab = 4) call console4
+	}
+}
+
+# Criar LOG caso haja DC.
+automacro criarlog {
+	var LogQuest unset
+	#exclusive 0
+	run-once 1
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = =  Iniciando Protocolo das Macros = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		$LogQuest = 1
+		do conf lockMap 0
+		do conf attackAuto 0
+		do conf route_randomWalk 0
+		#do conf autoTalkCont 0
+		release reload
+		release reload2
+	}
+}
+
+# Encontrar Arruaceira da Guilda in_rogue 367, 120
+automacro encontrar1 {
+	var LogQuest == 1 
+	#exclusive 0
+	run-once 1
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = =  Etapa 1 - Encontrar NPC da Quest = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move in_rogue 367 120
+		$LogQuest = 2
+		release reload
+		release reload2
+	}
+}
+
+# Responder Questionário in_rogue 367, 120
+automacro questionario {
+	run-once 1
+	var LogQuest == 2 
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = =  Etapa 2 - Iniciando Sequencia das Questões = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do talknpc 363 122 c w2 c w2 c w2 c w2 c w2 c w2 c w2 r0 c w2 c w2
+		pause 2
+		release reload
+		release reload2
+	}
+}
+
+automacro sequencia1 {
+	var LogQuest == 2
+	run-once 1
+	#exclusive 0
+	console /Perseguir/i
+	call {
+		#do conf autoTalkCont 1
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = = = =  Etapa 2 - Sequencia 1  = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		pause 2
+		do talk resp 0
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 0
+		pause 2
+		$LogQuest = 3
+		release reload
+		release reload2
+	}
+}
+
+automacro sequencia2 {
+	var LogQuest == 2
+	run-once 1
+	#exclusive 0
+	console /Gladius com slot/i
+	call {
+		#do conf autoTalkCont 1
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = = = =  Etapa 2 - Sequencia 2  = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 0
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 2
+		pause 2
+		$LogQuest = 3
+		release reload
+		release reload2
+	}
+}
+
+automacro sequencia3 {
+	var LogQuest == 2
+	run-once 1
+	#exclusive 0
+	console /percentual de aumento da velocidade/i
+	call {
+		#do conf autoTalkCont 1
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = = = =  Etapa 2 - Sequencia 3  = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		pause 2
+		do talk resp 0
+		pause 2
+		do talk resp 1
+		pause 2		
+		do talk resp 2
+		pause 2
+		do talk resp 3
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 1
+		pause 2
+		do talk resp 2
+		pause 2
+		do talk resp 1
+		pause 2
+		$LogQuest = 3
+		release reload
+		release reload2
+	}
+}
+
+# Encontrar Smithrato in_rogue 376, 23
+automacro encontrar2 {
+	var LogQuest == 3
+	#exclusive 0
+	run-once 1
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = =  Etapa 3 - Encontrar NPC da Quest = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		#do conf autoTalkCont 0
+		do move in_rogue 370 19
+		$LogQuest = 4
+		release reload
+		release reload2
+	}
+}
+
+## Receber quest de items Smithrato - in_rogue 375, 23
+automacro questitem1 {
+	var LogQuest == 4
+	run-once 1
+	#exclusive 0
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = =  Etapa 4 - Falar com NPC da Quest = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do talknpc 376 23 c w2 c w2 c w2 c w2 c w2 c w2 c w2
+		pause 2
+		$LogQuest = 5
+		release reload
+		release reload2
+	}
+}
+
+automacro checaitem1 {
+	var LogQuest == 5
+	run-once 1
+	#exclusive 0
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = =  Rogue Quest by CooLow  = = = = = = = =
+		log = = = = = = =   Etapa 5 - Checando Items  = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		if (@invamount (Erva Azul) < 6) goto Collect1
+		if (@invamount (Unha Apodrecida) < 10) goto Collect2
+		if (@invamount (Osso) < 10) goto Collect2
+		if (@invamount (Mandíbula Horrenda) < 10) goto Collect3
+		if (@invamount (Erva Azul) >= 6 && @invamount (Unha Apodrecida) >= 10 && @invamount (Osso) >= 10 && @invamount (Mandíbula Horrenda) >= 10 ) goto Finished
+		:Collect1
+			do pconf Erva Azul 2
+			do pconf Unha Apodrecida 0
+			do pconf Osso 0
+			do pconf Mandíbula Horrenda 0
+			do mconf all 0 0 0
+			do mconf Esporo 1 0 1
+			do mconf Zumbi  0 0 0
+			do mconf Esqueleto 0 0 0
+			do conf lockMap pay_fild02
+		    	do conf attackAuto 2
+		    	do conf route_randomWalk 1
+			release checaitem2
+			release reload
+			release reload2
+			stop
+		:Collect2
+			do pconf Erva Azul 0
+			do pconf Unha Apodrecida 2
+			do pconf Osso 2
+			do pconf Mandíbula Horrenda 2
+			do mconf all 0 0 0
+			do mconf Esporo 0 0 0
+			do mconf Zumbi  1 0 1
+			do mconf Esqueleto 1 0 1
+			do conf lockMap pay_dun00
+			do conf attackAuto 2
+		    	do conf route_randomWalk 1
+			release checaitem2
+			release reload
+			release reload2
+			stop
+		:Collect3
+			do pconf Erva Azul 0
+			do pconf Unha Apodrecida 0
+			do pconf Osso 0
+			do pconf Mandíbula Horrenda 2
+			do mconf all 0 0 0
+			do mconf Esporo 0 0 0
+			do mconf Zumbi  1 0 1
+			do mconf Esqueleto 1 0 1
+			do conf lockMap pay_dun00
+			do conf attackAuto 2
+		    	do conf route_randomWalk 1
+			release checaitem2
+			release reload
+			release reload2
+			stop
+		:Finished
+			log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+			log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+			log = = = = = = Etapa 5 - Items Coletado! = = = = = = = = =
+			log = = = = = = = = = Encerrando Busca  = = = = = = = = = =
+			log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+			do conf lockMap 0
+		    	do conf attackAuto 0
+		    	do conf route_randomWalk 0
+			$LogQuest = 6
+			release reload
+			release reload2
+			stop
+		}
+}
+
+automacro checaitem2 {
+	var LogQuest == 5
+	hook item_gathered
+	run-once 1
+	#exclusive 0
+	timeout 300
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = = = =  Etapa 5 - Item Coletado! = = = = = = = = =
+		log = = = = = = =  Voltando a checagem  = = = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		release checaitem1
+		release reload
+		release reload2
+	}
+}
+
+## Entregar Quest de items Smithrato - in_rogue 375, 23
+
+automacro encontrarnpc {
+	var LogQuest == 6
+	run-once 1
+	#exclusive 0
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = = = =  Etapa 6 - Encontrar NPC  = = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move in_rogue 370 19
+		$LogQuest = 7
+		release reload
+		release reload2
+	}
+}
+
+automacro questitem2 {
+	var LogQuest == 7
+	run-once 1
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = = = =  Etapa 7 - Entregar Items = = = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do talknpc 376 23 c w2 c w2 c w2
+		pause 2
+		do talknpc 376 23 c w2 c w2 c w2 c w2 c w2 c w2 c w2 c w2
+		release reload
+		release reload2
+	}
+}
+
+## Falta daqui pra baixo.
+
+automacro console1 {
+	console /Antonio não gosta de destruir itens de aprimoramento/i
+	var LogQuest == 7
+	run-once 1
+	#exclusive 0
+	call {
+		do talk no
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = =  Etapa 7 - Encontrar Antonio Jr.  = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move cmd_fild04 304 179
+		pause 2
+		do talk cont
+		pause 2	
+		do talk resp 2
+		pause 2	
+		do talk resp 1
+		pause 2	
+		do talk resp 1
+		pause 2	
+		do talk resp 2
+		pause 2	
+		do talk cont
+		$Lab = 1
+		$LogQuest = 8
+		release reload
+		release reload2
+	}
+}
+
+automacro console2 {
+	console /Hermanthorn Jr/i
+	var LogQuest == 7
+	run-once 1
+	#exclusive 0
+	call {
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = Etapa 7 - Encontrar Hermanthorn Jr. = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move in_rogue 267 132
+		$Lab = 2
+		release reload
+		release reload2
+	}
+}
+
+automacro console3 {
+	console /Meu pai nunca colecionou itens de aprimoramento/i
+	var LogQuest == 7
+	run-once 1
+	#exclusive 0
+	call {
+		do talk no
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = = Etapa 7 - Encontrar Holgrehen Jr. = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move cmd_fild09 336 143
+		pause 2
+		do talk cont
+		pause 2	
+		do talk resp 0
+		pause 2	
+		do talk resp 2
+		pause 2	
+		do talk resp 4
+		pause 2	
+		do talk resp 0
+		pause 2	
+		do talk cont
+		$Lab = 3
+		$LogQuest = 8
+		release reload
+		release reload2
+	}
+}
+
+automacro console4 {
+	console /Aragham nunca colecionou itens de aprimoramento/i
+	var LogQuest == 7
+	run-once 1
+	call {
+		do talk no
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		log = = = = = = = Rogue Quest by CooLow = = = = = = = = = =
+		log = = = = = Etapa 7 - Encontrar Aragham Jr. = = = = = = =
+		log = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		do move cmd_fild09 106 194
+		pause 2
+		do talk cont
+		pause 2	
+		do talk resp 1
+		pause 2	
+		do talk resp 2
+		pause 2	
+		do talk resp 1
+		pause 2	
+		do talk resp 0
+		pause 2	
+		do talk cont
+		$Lab = 4
+		$LogQuest = 8
+		release reload
+		release reload2
+	}	
+}
+#############################################################
+###################### Antonio Jr ###########################
+#############################################################
+
+automacro antoniojr2 {
+	#exclusive 0
+	run-once 1
+	var LogQuest == 8
+	var Lab == 1
+	call {
+		do move 173 108
+		pause 2
+		do talknpc 177 109 c w2 c w2 c w2 c w2 c w2 r0 w2 c w2
+		$LogQuest = 9
+		$NewLab = 5
+		release reload
+		release reload2
+	}
+}
+
+#############################################################
+###################### Antonio Jr ###########################
+#############################################################
+
+#############################################################
+#################### Hermathorn Jr ##########################
+#############################################################
+
+automacro hermanthornjr1 {
+	var LogQuest == 7
+	var Lab == 2
+	run-once 1
+	call {
+		do talknpc 272 135 c w2 c w2 c w2 c w2 c w2 c w2 c w2
+		pause 2
+		do talknpc 272 135 c w2
+		release reload
+		release reload2
+	}
+}
+
+automacro hermanthornjr2 {
+	var LogQuest == 7
+	var Lab == 2
+	run-once 1
+	#exclusive 0
+	console /a combinação de quatro números são (\d+)/i
+	call {
+		do move in_rogue 271 130
+		pause 2
+		do talk cont
+		pause 2
+		to talk num $.lastMatch1
+		$NewLab = 6
+		release reload
+		release reload2
+	}
+}
+
+#############################################################
+#################### Hermathorn Jr ##########################
+#############################################################
+
+#############################################################
+#################### Holgrehen Jr ###########################
+#############################################################
+
+automacro holgrehenjr1 {
+	var LogQuest == 8
+	var Lab == 3
+	run-once 1
+	#exclusive 0
+	call {
+		do move in_rogue 165 34
+		pause 2
+		do talknpc 160 34 c w2 c w2 c w2 c w2 c w2 c w2 r0 w2 c w2
+		pause 2
+		$LogQuest = 9
+		$NewLab = 5
+		release reload
+		release reload2
+	}
+}
+
+#############################################################
+#################### Holgrehen Jr ###########################
+#############################################################
+
+#############################################################
+#################### Agraham Jr #############################
+#############################################################
+
+automacro aragham2 {
+	var LogQuest == 8
+	var Lab == 4
+	#exclusive 0
+	run-once 1
+	call {
+		do move in_rogue 249 34
+		do talknpc 244 39 c w2 c w2 c w2 c w2 c w2 c w2 r0 w2 c w2
+		$LogQuest = 9
+		$NewLab = 5
+		release reload
+		release reload2
+	}
+}
+
+#############################################################
+#################### Agraham Jr #############################
+#############################################################
+
+automacro labgrande {
+	var LogQuest == 9
+	var NewLab == 5
+	#exclusive 0
+	run-once 1
+	location in_rogue 15 105
+	call {
+		do move 369 320
+		pause 2
+		$LogQuest = 10
+		release reload
+		release reload2
+	}
+}
+
+automacro labpequeno {
+	var LogQuest == 9
+	location in_rogue 10 21
+	var NewLab == 6
+	#exclusive 0
+	run-once 1
+	call {
+		do move in_rogue 8 9
+		pause 2
+		do move in_rogue 9 389
+		pause 2
+		$LogQuest = 10
+		release reload
+		release reload2
+	}
+}
+
+automacro finaliza {
+	location in_rogue 378 113, in_rogue 367 10
+	var LogQuest == 10
+	#exclusive 0
+	run-once 1
+	call {
+		do move in_rogue 368 119
+		pause 2
+		do talknpc 363 122 c w2 c w2 c w2
+		do relog 9999999
+	}
+}
