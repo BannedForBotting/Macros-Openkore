@@ -1,0 +1,92 @@
+#############################################################################
+# Macro de Identificar por CooLow									#
+# v1.0 - 22-07-2017															#
+# Openkore: http://openkore.com/											#
+# Openkore Brasil: http://openkorebrasil.org								#
+# Openkore Forums: http://forums.openkore.com.br							#
+#																			#
+# Este código fonte estáicenciado sob										#
+# Licença Pública Geral GNU, Versão 3.										#
+# Saiba mais em http://www.gnu.org/licenses/gpl.html						#
+#############################################################################
+#																			#
+# Adicione no config.txt a opção masterLockMap e 							#
+# coloque o lockmap do master. Defina o mesmo Savemap 						#
+# para o Master e o Slave. Para melhor desempenho, utilize o BusFollow.		#
+#																			#
+#############################################################################
+
+#############################################################################
+############################## INICIALIZAR ##################################
+#############################################################################
+
+automacro Inicia {
+	run-once 1
+	exclusive 1
+	overrideAI 1
+	call {
+		#(0|1) Desativa/Ativa Auto Identificação de Itens
+		$Identifica = 0
+	}
+}
+
+automacro CheckIdentify {
+	var Identifica = 1
+	mapchange any
+	overrideAI 1
+	call {
+		if (@eval ($::config{saveMap}) == $.map) goto certo
+		if (@eval ($::config{saveMap}) != $.map) goto errado
+		
+		:certo
+		do ai off
+		do i
+		goto fim
+		
+		:errado
+		do ai on
+		goto fim
+		
+		:fim
+	}
+}
+
+automacro identify {
+	var Identifica = 1
+	console /Não Identificado/i
+	overrideAI 1
+	call ident
+}
+
+macro ident {
+		do ss 40
+		pause 1
+		do identify 0
+		pause 1
+		do i
+}
+
+automacro semsp {
+	var Identifica = 1
+	console /Conjuração falhou: SP insuficiente/i
+	overrideAI 1
+	exclusive 1
+	call {
+		if $.weight >= 50% goto desiste
+		if $.weight < 50% goto espera
+		
+		:espera
+		do sit
+		pause 60
+		do stand
+		do i
+		:fim
+		
+		:desiste
+		log Você está com sobrepeso. Finalizando a macro.
+		goto fim
+		
+		:fim
+	}
+}
+#############################################################################
