@@ -1,19 +1,19 @@
 #############################################################################
-# Macro de Identificar por CooLow									#
-# v1.0 - 22-07-2017															#
-# Openkore: http://openkore.com/											#
-# Openkore Brasil: http://openkorebrasil.org								#
-# Openkore Forums: http://forums.openkore.com.br							#
-#																			#
-# Este código fonte estáicenciado sob										#
-# Licença Pública Geral GNU, Versão 3.										#
-# Saiba mais em http://www.gnu.org/licenses/gpl.html						#
+# Macro de Identificar por CooLow					    #
+# v1.0 - 22-07-2017							    #
+# Openkore: http://openkore.com/					    #
+# Openkore Brasil: http://openkorebrasil.org				    #
+# Openkore Forums: http://forums.openkore.com.br			    #
+#									    #
+# Este código fonte estáicenciado sob					    #
+# Licença Pública Geral GNU, Versão 3.					    #
+# Saiba mais em http://www.gnu.org/licenses/gpl.html			    #
 #############################################################################
-#																			#
-# Adicione no config.txt a opção masterLockMap e 							#
-# coloque o lockmap do master. Defina o mesmo Savemap 						#
-# para o Master e o Slave. Para melhor desempenho, utilize o BusFollow.		#
-#																			#
+#									    #
+# Adicione no config.txt a opção masterLockMap e 			    #
+# coloque o lockmap do master. Defina o mesmo Savemap 			    #
+# para o Master e o Slave. Para melhor desempenho, utilize o BusFollow.	    #
+#									    #
 #############################################################################
 
 #############################################################################
@@ -26,7 +26,7 @@ automacro Inicia {
 	overrideAI 1
 	call {
 		#(0|1) Desativa/Ativa Auto Identificação de Itens
-		$Identifica = 0
+		$Identifica = 1
 	}
 }
 
